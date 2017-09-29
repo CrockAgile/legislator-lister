@@ -7,13 +7,14 @@ export default class DebounceInput extends React.Component {
     super(props);
     this.state = {
       debounceTimeout: null,
-      input: ""
+      input: props.initialInput
     };
     this.handleInputChange = this.handleInputChange.bind(this);
   }
   static propTypes = {
     inputHandler: PropTypes.func.isRequired,
     inputHandlerArgs: PropTypes.array,
+    initialInput: PropTypes.any,
     debounce: PropTypes.number.isRequired,
     type: PropTypes.string.isRequired,
     size: PropTypes.number

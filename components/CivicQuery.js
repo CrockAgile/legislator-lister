@@ -9,7 +9,7 @@ const QueryResultWrapper = Glamorous.div({
   flex: "1 1 auto",
   width: "auto",
   flexBasis: "auto",
-  padding: "0 0.5rem"
+  padding: "0 0.3rem"
 });
 
 export default class CivicQuery extends React.Component {
@@ -91,7 +91,7 @@ export default class CivicQuery extends React.Component {
     if (!this.state.error) {
       queryResults = this.state.offices.map((office, index) => {
         const official = this.state.officials[office.officialIndices[0]];
-        return <CivicQueryResult official={official} office={office} />;
+        return <CivicQueryResult official={official} office={office} key={index} />;
       });
     }
     return <QueryResultWrapper>{queryResults}</QueryResultWrapper>;
