@@ -37,7 +37,7 @@ export default class CivicQueryList extends React.Component {
         <CivicQueryWrapper key={index}>
           <DebounceInput
             type="text"
-            size="40"
+            size={40}
             debounce={this.state.debounce}
             inputHandler={this.handleInput}
             inputHandlerArgs={[index]}
