@@ -1,6 +1,6 @@
 import React from "react";
 import Glamorous from "glamorous";
-import LegislatorItem from "./LegislatorItem";
+import CivicQueryResult from "./CivicQueryResult";
 
 const googleCivicsKey = "AIzaSyBn9na2UKkxK1LtpZmgUQimxckotK6fNKk";
 const QueryResultWrapper = Glamorous.span({
@@ -11,7 +11,7 @@ const QueryResultWrapper = Glamorous.span({
   paddingLeft: "0.5rem"
 });
 
-export default class LegislatorQueryResult extends React.Component {
+export default class CivicQuery extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,7 +22,8 @@ export default class LegislatorQueryResult extends React.Component {
   }
   componentDidUpdate(prevProps, prevState) {
     if (this.props.address && this.props.address != prevProps.address) {
-      let queryString = LegislatorQueryResult.propsToQueryString(this.props);
+      let queryString = CivicQuery.propsToQueryString(this.props);
+      return("short circuit");
       fetch(queryString)
         .then(response => {
           return response.json();
@@ -75,15 +76,13 @@ export default class LegislatorQueryResult extends React.Component {
     });
   }
   render() {
-    let legislators = "ERROR";
-
+    let queryResults = "ERROR";
     if (!this.state.error) {
-      legislators = this.state.offices.map((office, index) => {
-        // TODO: fix assumption that every office is filled by only one official
+      queryResults = this.state.offices.map((office, index) => {
         const official = this.state.officials[office.officialIndices[0]];
-        return <LegislatorItem official={official} office={office} />;
+        return <CivicQueryResult official={official} office={office} />;
       });
     }
-    return <QueryResultWrapper>{legislators}</QueryResultWrapper>;
+    return <QueryResultWrapper>{queryResults}</QueryResultWrapper>;
   }
 }

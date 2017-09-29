@@ -1,16 +1,16 @@
 import React from "react";
 import Glamorous from "glamorous";
 
-const LegislatorItemWrapper = Glamorous.span({
+const CivicQueryResultWrapper = Glamorous.span({
   padding: "0 0.5rem"
 });
 
 export default props => {
   return (
-    <LegislatorItemWrapper>
+    <CivicQueryResultWrapper>
       {props.official.name}
       <br />
       {props.office.name}
-    </LegislatorItemWrapper>
+    </CivicQueryResultWrapper>
   );
 };

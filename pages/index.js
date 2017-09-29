@@ -1,7 +1,7 @@
 import React from "react";
 import { rehydrate, css } from "glamor";
 import Glamorous from "glamorous";
-import LegislatorQueryList from "../components/LegislatorQueryList";
+import CivicQueryList from "../components/CivicQueryList";
 
 // Adds server generated styles to glamor cache.
 // Has to run before any `style()` calls
@@ -27,6 +27,6 @@ export default class IndexPage extends React.Component {
     });
   }
   render() {
-    return <LegislatorQueryList />;
+    return <CivicQueryList />;
   }
 }
