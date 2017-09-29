@@ -27,6 +27,6 @@ export default class IndexPage extends React.Component {
     });
   }
   render() {
-    return <CivicQueryList />;
+    return <CivicQueryList initialLength={20} />;
   }
 }
