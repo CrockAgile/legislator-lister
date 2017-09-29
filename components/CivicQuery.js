@@ -1,14 +1,15 @@
 import React from "react";
 import Glamorous from "glamorous";
+import PropTypes from "prop-types";
 import CivicQueryResult from "./CivicQueryResult";
 
 const googleCivicsKey = "AIzaSyBn9na2UKkxK1LtpZmgUQimxckotK6fNKk";
-const QueryResultWrapper = Glamorous.span({
+const QueryResultWrapper = Glamorous.div({
   display: "flex",
   flex: "1 1 auto",
   width: "auto",
   flexBasis: "auto",
-  paddingLeft: "0.5rem"
+  padding: "0 0.5rem"
 });
 
 export default class CivicQuery extends React.Component {
@@ -23,7 +24,6 @@ export default class CivicQuery extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.props.address && this.props.address != prevProps.address) {
       let queryString = CivicQuery.propsToQueryString(this.props);
-      return("short circuit");
       fetch(queryString)
         .then(response => {
           return response.json();
@@ -36,6 +36,17 @@ export default class CivicQuery extends React.Component {
         });
     }
   }
+  static propTypes = {
+    address: PropTypes.string.isRequired,
+    includeOffices: PropTypes.bool,
+    levels: PropTypes.arrayOf(PropTypes.string),
+    roles: PropTypes.arrayOf(PropTypes.string)
+  };
+  static defaultProps = {
+    includeOffices: true,
+    levels: ["administrativeArea1"],
+    roles: ["legislatorUpperBody", "legislatorLowerBody"]
+  };
   static propsToQueryString(props) {
     let queryString = "https://www.googleapis.com/civicinfo/v2/representatives";
     queryString += `?address=${props.address}`;
@@ -76,7 +87,7 @@ export default class CivicQuery extends React.Component {
     });
   }
   render() {
-    let queryResults = "ERROR";
+    let queryResults = <CivicQueryResult error={this.state.error} />;
     if (!this.state.error) {
       queryResults = this.state.offices.map((office, index) => {
         const official = this.state.officials[office.officialIndices[0]];

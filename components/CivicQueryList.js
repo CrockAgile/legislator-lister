@@ -1,6 +1,8 @@
 import React from "react";
 import Glamorous from "glamorous";
+import PropTypes from "prop-types";
 import DebounceInput from "../components/DebounceInput";
+import CivicQuery from "../components/CivicQuery";
 
 const CivicQueryListWrapper = Glamorous.div({
   backgroundColor: "#88CC88",
@@ -14,17 +16,34 @@ const ListHeader = Glamorous.h1({
   color: "#444"
 });
 
-const CivicQueryWrapper = Glamorous.div({});
+const CivicQueryWrapper = Glamorous.div({
+  display: "flex",
+  flex: "1 1 auto",
+  borderTop: "0.1em solid black",
+  padding: "0.3em 0",
+  minHeight: "2.5em",
+  ":last-child": {
+    borderBottom: "0.1em solid black"
+  },
+  "& input": {
+    padding: "0",
+    fontSize: "1.4em",
+    border: "none"
+  }
+});
 
 export default class CivicQueryList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      debounce: 1000,
-      addressList: Array(10).fill("")
+      debounce: 2000,
+      addressList: Array(this.props.initialLength).fill("")
     };
     this.handleInput = this.handleInput.bind(this);
   }
+  static propTypes = {
+    initialLength: PropTypes.number.isRequired
+  };
   handleInput(input, index) {
     this.setState(prevState => {
       prevState.addressList[index] = input;
@@ -42,7 +61,7 @@ export default class CivicQueryList extends React.Component {
             inputHandler={this.handleInput}
             inputHandlerArgs={[index]}
           />
-          {address}
+          <CivicQuery address={address} />
         </CivicQueryWrapper>
       );
     });

@@ -14,8 +14,8 @@ export default class DebounceInput extends React.Component {
   static propTypes = {
     inputHandler: PropTypes.func.isRequired,
     inputHandlerArgs: PropTypes.array,
-    debounce: PropTypes.number,
-    type: PropTypes.string,
+    debounce: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
     size: PropTypes.number
   };
   handleInputChange(event) {
@@ -36,6 +36,7 @@ export default class DebounceInput extends React.Component {
         type={this.props.type}
         size={this.props.size}
         onChange={this.handleInputChange}
+        value={this.state.input}
       />
     );
   }
