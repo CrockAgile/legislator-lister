@@ -10,7 +10,6 @@ const QueryResultWrapper = Glamorous.div({
   width: "auto",
   flexBasis: "auto",
   padding: "0 0.3rem"
-  padding: "0 0.5rem"
 });
 
 export default class CivicQuery extends React.Component {
