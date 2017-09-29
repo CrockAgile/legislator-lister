@@ -26,13 +26,18 @@ export default class CivicQueryList extends React.Component {
     this.handleInput = this.handleInput.bind(this);
   }
   handleInput(input, index) {
-    console.log(`handleInput ${input} at ${index}`);
+    this.setState(prevState => {
+      prevState.addressList[index] = input;
+      return prevState;
+    });
   }
   render() {
     const civicQueries = this.state.addressList.map((address, index) => {
       return (
         <CivicQueryWrapper key={index}>
           <DebounceInput
+            type="text"
+            size="40"
             debounce={this.state.debounce}
             inputHandler={this.handleInput}
             inputHandlerArgs={[index]}
