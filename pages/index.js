@@ -27,6 +27,6 @@ export default class IndexPage extends React.Component {
     });
   }
   render() {
-    return <CivicQueryList initialLength={20} />;
+    return <CivicQueryList initialLength={20} debounce={2000} />;
   }
 }
