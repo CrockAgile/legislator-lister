@@ -19,6 +19,11 @@ export default class DebounceInput extends React.Component {
     type: PropTypes.string.isRequired,
     size: PropTypes.number
   };
+  componentWillUnmount() {
+    if (this.state.debounceTimeout) {
+      clearTimeout(this.state.debounceTimeout);
+    }
+  }
   handleInputChange(event) {
     const newInput = event.target.value;
     this.setState(prevState => {
