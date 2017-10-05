@@ -96,7 +96,6 @@ export default class CivicQueryList extends React.Component {
             listResizeHandler={this.handlelistResize}
           />
         </ListHeaderWrapper>
-        {civicQueries}
       </CivicQueryListWrapper>
     );
   }
