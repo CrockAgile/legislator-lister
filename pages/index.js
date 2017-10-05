@@ -1,7 +1,7 @@
 import React from "react";
 import { rehydrate, css } from "glamor";
 import Glamorous from "glamorous";
-import CivicQueryList from "../components/CivicQueryList";
+import CivicsTable from "../components/CivicsTable.elm";
 
 // Adds server generated styles to glamor cache.
 // Has to run before any `style()` calls
@@ -15,18 +15,20 @@ export default class IndexPage extends React.Component {
     super(props);
     css.global("html, body", {
       boxSizing: "border-box",
-      padding: "0.5rem 0",
-      margin: 0,
+      padding: "0",
+      margin: "0",
       backgroundColor: "#55AA55",
       minHeight: "100%",
       fontFamily: "Ubuntu, Helvetica"
     });
 
     css.global("*", {
-      boxSizing: "border-box"
+      boxSizing: "border-box",
+      padding: "0",
+      margin: "0"
     });
   }
   render() {
-    return <CivicQueryList initialLength={20} debounce={2000} />;
+    return <h1>Prep for elm</h1>;
   }
 }
